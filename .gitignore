@@ -3,3 +3,5 @@
 /programmet-debug.exe
 /check.exe
 .clang-format
+/shapes.o
+/TestShapes.o
