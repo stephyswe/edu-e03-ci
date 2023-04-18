@@ -1,0 +1,5 @@
+/.vscode
+/bin
+/programmet-debug.exe
+/check.exe
+.clang-format
