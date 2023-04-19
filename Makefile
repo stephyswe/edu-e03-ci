@@ -32,14 +32,10 @@ clean:
 $(OUTPUTDIR):
 	@mkdir "$(OUTPUTDIR)"
 
-$(TEST): shapes.o TestShapes.o input.o
+$(TEST): shapes.o input.o TestShapes.o
 	g++ -o $@ $^ $(CFLAGS) -I $(GTEST)  $(LIBGTEST)
 
 test: $(TEST)
 	./$(TEST)
 
 .PHONY: clean test
-
-watch:
-	watchman watch .
-	watchman -- trigger $(shell watchman -p build-when-changed shapes.c shapes.h) -- make

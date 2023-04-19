@@ -15,5 +15,6 @@ typedef struct {
 } Shapes;
 
 Shapes_Status shapesMenu();
+Shapes_Status createRectangle(double length, double width, double *area, double *perimeter);
 
 #endif
