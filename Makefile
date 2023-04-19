@@ -1,7 +1,7 @@
 PROG=programmet.exe
 TEST=check.exe
-SOURCES=main.c calculator.c shapes.c
-DEPS=shapes.h calculator.h
+SOURCES=main.c calculator.c shapes.c input.c
+DEPS=shapes.h calculator.h input.h
 CC=gcc
 CFLAGS=-Wall -Werror
 DEBUG?=1
@@ -32,10 +32,14 @@ clean:
 $(OUTPUTDIR):
 	@mkdir "$(OUTPUTDIR)"
 
-$(TEST): shapes.o TestShapes.o
+$(TEST): shapes.o TestShapes.o input.o
 	g++ -o $@ $^ $(CFLAGS) -I $(GTEST)  $(LIBGTEST)
 
 test: $(TEST)
 	./$(TEST)
 
 .PHONY: clean test
+
+watch:
+	watchman watch .
+	watchman -- trigger $(shell watchman -p build-when-changed shapes.c shapes.h) -- make

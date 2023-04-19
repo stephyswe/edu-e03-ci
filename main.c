@@ -5,7 +5,7 @@
 
 int mainmenu() {
     while (1) {
-        printf("1. Shapes\n2.Calculator\n3.Exit");
+        printf("1. Shapes\n2. Calculator\n3. Exit\nChoice: ");
         int sel;
         scanf(" %d", &sel);
         if (sel >= 1 || sel <= 3) return sel;

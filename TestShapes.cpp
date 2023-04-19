@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 extern "C" {
+#include "input.h"
 #include "shapes.h"
 }
 
