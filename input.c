@@ -8,6 +8,34 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "shapes.h"
+
+
+
+Shapes_Status getInputValue(char *param, double *value) {
+    int numTries = 0;
+    char input[20];
+    INPUT_RESULT inputResult;
+
+    while (numTries < 3) {  // Allow up to 3 attempts
+        inputResult = GetInput(param, input, sizeof(input));
+
+        if (inputResult == INPUT_RESULT_OK) {
+            if (sscanf(input, "%lf", value) == 1) {
+                return Shapes_Status_Ok;
+            }
+        }
+
+        numTries++;
+
+        if (numTries < 3) {
+            printf("Invalid input, please try again.\n");
+        }
+    }
+
+    return Shapes_Status_InvalidInput;
+};
+
 INPUT_RESULT GetInputDouble(char *prompt, double *value) {
     char input[20];
     INPUT_RESULT inputResult;

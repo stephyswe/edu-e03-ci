@@ -3,4 +3,6 @@
 
 void calculatorMenu();
 
+double calculateAddiction(double num1, double num2);
+
 #endif

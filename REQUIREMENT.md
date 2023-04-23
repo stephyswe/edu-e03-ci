@@ -1,30 +1,13 @@
+** Requirements for the C-programming course at Systementor AB
+
 Skriv ett C-progam som gör följande
 
 G-krav
+Appen ska öppnas med en huvudmeny där användaren får välja vad den vill arbeta med (Shapes, Miniräknare).
 
-Appen ska öppnas med en huvudmeny där användaren får välja vad den vill arbeta med (Shapes, Miniräknare)
+Shapes: Användaren ska kunna mata in en form (TEXT! ej nummer) och därefter ska både area och omkrets ska räknas fram. Dessa former ska finnas att välja bland när appen startas: Rektangel, Parallellogram, Triangel & Cirkel
 
-Shapes: Användaren ska kunna mata in en form (TEXT! ej nummer) och därefter ska både area och omkrets ska räknas fram. Dessa former ska finnas att välja bland när appen startas:
-
-Rektangel
-
-Parallellogram
-
-Triangel
-
-Cirkel
-
-Miniräknare: Användaren ska kunna mata in två tal och sedan bestämmer vilken operator ska användas.
-
--
-
-*
-
--
-
-/
-
-% (modulus)
+Miniräknare: Användaren ska kunna mata in två tal och sedan bestämmer vilken operator ska användas: -, *, -, / & % (modulus)
 
         Svaren ska redovisas på ett korrekt sätt med 2 decimaler.
 

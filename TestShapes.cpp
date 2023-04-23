@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 extern "C" {
+#include "calculator.h"
 #include "input.h"
 #include "shapes.h"
 }
@@ -16,7 +17,7 @@ class ShapesTest : public testing::Test {
     virtual void TearDown() {}
 };
 
-// Test the createRectangle function
+// ** Shapes Tests **
 TEST_F(ShapesTest, WhenCreateRectangleIsOK) {
     // ARRANGE
     double area, perimeter;
@@ -28,7 +29,6 @@ TEST_F(ShapesTest, WhenCreateRectangleIsOK) {
     ASSERT_EQ(status, Shapes_Status_Ok);
     ASSERT_DOUBLE_EQ(area, 30.0);
     ASSERT_DOUBLE_EQ(perimeter, 22.0);
-
 }
 
 TEST_F(ShapesTest, WhenCreateRectangleLengthIsZero) {
@@ -40,4 +40,31 @@ TEST_F(ShapesTest, WhenCreateRectangleLengthIsZero) {
 
     // ASSERT
     ASSERT_EQ(status, Shapes_Status_InvalidInput);
+}
+
+// ** Calculator Tests **
+TEST_F(ShapesTest, AddsTwoNumbersCorrectly) {
+    // Arrange
+    double num1 = 2.5;
+    double num2 = 3.5;
+    double expected_result = 6.0;
+
+    // Act
+    double result = calculateAddiction(num1, num2);
+
+    // Assert
+    EXPECT_EQ(result, expected_result);
+}
+
+TEST_F(ShapesTest, AddsTwoNumbersWrongResultInError) {
+    // Arrange
+    double num1 = 2.5;
+    double num2 = 3.5;
+    double expected_result = 6.1;
+
+    // Act
+    double result = calculateAddiction(num1, num2);
+
+    // Assert
+    EXPECT_FALSE(result == expected_result);
 }

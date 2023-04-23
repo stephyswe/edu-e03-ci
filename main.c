@@ -1,7 +1,27 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "calculator.h"
 #include "shapes.h"
+
+int characterCheck() {
+    char input[100];
+
+    while (1) {
+        printf("Enter a string starting with 'A' or 'B': ");
+        scanf("%s", input);
+
+        if (strlen(input) > 0 && (input[0] == 'A' || input[0] == 'B')) {
+            printf("You entered: %s\n", input);
+            break;
+        } else {
+            printf("Invalid input. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
 
 int mainmenu() {
     while (1) {
