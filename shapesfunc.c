@@ -39,7 +39,7 @@ Shapes_Status inputTriangle(double *area, double *perimeter) {
 
 Shapes_Status createCircle(double radius, double *area,
                            double *perimeter) {
-    const double PI = 3.14159265358979323846;
+    const double PI = 3.14;
     if (radius <= 0) {
         return Shapes_Status_InvalidInput;
     }

@@ -83,8 +83,8 @@ TEST_F(ShapesTest, WhenCreateCircleLengthIsOK) {
 
     // ASSERT
     ASSERT_EQ(status, Shapes_Status_Ok);
-    // ASSERT_DOUBLE_EQ(area, 78.53981633974483);
-    // ASSERT_DOUBLE_EQ(perimeter, 31.41592653589793);
+    ASSERT_DOUBLE_EQ(area, 78.50);
+    ASSERT_DOUBLE_EQ(perimeter, 31.40);
 }
 
 TEST_F(ShapesTest, WhenCreateCircleLengthIsZero) {
