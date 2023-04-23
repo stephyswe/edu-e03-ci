@@ -17,7 +17,7 @@ class ShapesTest : public testing::Test {
     virtual void TearDown() {}
 };
 
-// ** Shapes Tests **
+// ** Shapes Tests - All Four (rectangle, triangle, circle, parallelogram) **
 
 // ** 1 - Rectangle **
 
@@ -83,8 +83,8 @@ TEST_F(ShapesTest, WhenCreateCircleLengthIsOK) {
 
     // ASSERT
     ASSERT_EQ(status, Shapes_Status_Ok);
-    //ASSERT_DOUBLE_EQ(area, 78.53981633974483);
-    //ASSERT_DOUBLE_EQ(perimeter, 31.41592653589793);
+    // ASSERT_DOUBLE_EQ(area, 78.53981633974483);
+    // ASSERT_DOUBLE_EQ(perimeter, 31.41592653589793);
 }
 
 TEST_F(ShapesTest, WhenCreateCircleLengthIsZero) {
@@ -98,7 +98,31 @@ TEST_F(ShapesTest, WhenCreateCircleLengthIsZero) {
     ASSERT_EQ(status, Shapes_Status_InvalidInput);
 }
 
+// ** 4 - Parallelogram **
+TEST_F(ShapesTest, WhenCreateParallelogramLengthIsOK) {
+    // ARRANGE
+    double area, perimeter;
 
+    // ACT
+    Shapes_Status status =
+        createParallelogram(5.0, 6.0, 7.0, &area, &perimeter);
+
+    // ASSERT
+    ASSERT_EQ(status, Shapes_Status_Ok);
+    ASSERT_DOUBLE_EQ(area, 30.0);
+    ASSERT_DOUBLE_EQ(perimeter, 24.0);
+}
+
+TEST_F(ShapesTest, WhenCreateParallelogramLengthIsZero) {
+    // ARRANGE
+    double area, perimeter;
+
+    // ACT
+    Shapes_Status status = createParallelogram(0, 6.0, 7.0, &area, &perimeter);
+
+    // ASSERT
+    ASSERT_EQ(status, Shapes_Status_InvalidInput);
+}
 
 // ** Calculator Tests **
 TEST_F(ShapesTest, AddsTwoNumbersCorrectly) {

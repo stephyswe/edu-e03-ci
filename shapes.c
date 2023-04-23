@@ -11,22 +11,10 @@ typedef struct {
     Shapes_Status (*function)(double *, double *);
 } ShapeFunction;
 
-
-Shapes_Status createParallelogram(double *area, double *perimeter) {
-    double base, height, side;
-    Shapes_Status status;
-    GET_INPUT_VALUE("base: ", &base);
-    GET_INPUT_VALUE("height: ", &height);
-    GET_INPUT_VALUE("side: ", &side);
-    *area = base * height;
-    *perimeter = 2 * (base + side);
-    return Shapes_Status_Ok;
-};
-
 ShapeFunction shapeFunctions[] = {{"rectangle", inputRectangle},
                                   {"triangle", inputTriangle},
                                   {"circle", inputCircle},
-                                  {"parallelogram", createParallelogram},
+                                  {"parallelogram", inputParallelogram},
                                   {NULL, NULL}};
 
 Shapes_Status shapesMenu() {
