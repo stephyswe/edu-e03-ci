@@ -12,17 +12,6 @@ typedef struct {
 } ShapeFunction;
 
 
-
-Shapes_Status createCircle(double *area, double *perimeter) {
-    const double PI = 3.14159265358979323846;
-    double radius;
-    Shapes_Status status;
-    GET_INPUT_VALUE("radius: ", &radius);
-    *area = PI * radius * radius;
-    *perimeter = 2 * PI * radius;
-    return Shapes_Status_Ok;
-}
-
 Shapes_Status createParallelogram(double *area, double *perimeter) {
     double base, height, side;
     Shapes_Status status;
@@ -36,7 +25,7 @@ Shapes_Status createParallelogram(double *area, double *perimeter) {
 
 ShapeFunction shapeFunctions[] = {{"rectangle", inputRectangle},
                                   {"triangle", inputTriangle},
-                                  {"circle", createCircle},
+                                  {"circle", inputCircle},
                                   {"parallelogram", createParallelogram},
                                   {NULL, NULL}};
 

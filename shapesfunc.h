@@ -11,4 +11,7 @@ Shapes_Status inputTriangle(double *area, double *perimeter);
 Shapes_Status createTriangle(double base, double height, double *area,
                              double *perimeter);
 
+Shapes_Status inputCircle(double *area, double *perimeter);
+Shapes_Status createCircle(double radius, double *area, double *perimeter);
+
 #endif

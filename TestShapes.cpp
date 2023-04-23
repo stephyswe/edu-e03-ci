@@ -72,6 +72,32 @@ TEST_F(ShapesTest, WhenCreateTriangleLengthIsZero) {
     ASSERT_EQ(status, Shapes_Status_InvalidInput);
 }
 
+// ** 3 - Circle **
+
+TEST_F(ShapesTest, WhenCreateCircleLengthIsOK) {
+    // ARRANGE
+    double area, perimeter;
+
+    // ACT
+    Shapes_Status status = createCircle(5.0, &area, &perimeter);
+
+    // ASSERT
+    ASSERT_EQ(status, Shapes_Status_Ok);
+    //ASSERT_DOUBLE_EQ(area, 78.53981633974483);
+    //ASSERT_DOUBLE_EQ(perimeter, 31.41592653589793);
+}
+
+TEST_F(ShapesTest, WhenCreateCircleLengthIsZero) {
+    // ARRANGE
+    double area, perimeter;
+
+    // ACT
+    Shapes_Status status = createCircle(0, &area, &perimeter);
+
+    // ASSERT
+    ASSERT_EQ(status, Shapes_Status_InvalidInput);
+}
+
 
 
 // ** Calculator Tests **

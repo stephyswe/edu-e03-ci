@@ -36,3 +36,21 @@ Shapes_Status inputTriangle(double *area, double *perimeter) {
     GET_INPUT_VALUE("height: ", &height);
     return createTriangle(base, height, area, perimeter);
 }
+
+Shapes_Status createCircle(double radius, double *area,
+                           double *perimeter) {
+    const double PI = 3.14159265358979323846;
+    if (radius <= 0) {
+        return Shapes_Status_InvalidInput;
+    }
+    *area = PI * radius * radius;
+    *perimeter = 2 * PI * radius;
+    return Shapes_Status_Ok;
+}
+
+Shapes_Status inputCircle(double *area, double *perimeter) {
+    double radius;
+    Shapes_Status status;
+    GET_INPUT_VALUE("radius: ", &radius);
+    return createCircle(radius, area, perimeter);
+}
