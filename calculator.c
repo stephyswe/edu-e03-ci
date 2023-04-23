@@ -65,20 +65,20 @@ char getValidOperator() {
 OperatorFunction opFunction = NULL;
 
 typedef struct {
-    const char* operatorString;
+    char operatorChar;
     OperatorFunction operatorFunction;
 } OperatorMapping;
 
-OperatorMapping operatorMappings[] = {{"+", calculateAddiction},
-                                      {"-", subtract},
-                                      {"*", multiply},
-                                      {"/", divide},
-                                      {"%", modulus}};
+OperatorMapping operatorMappings[] = {{OPERATOR_ADD, calculateAddiction},
+                                      {OPERATOR_SUB, subtract},
+                                      {OPERATOR_MUL, multiply},
+                                      {OPERATOR_DIV, divide},
+                                      {OPERATOR_MOD, modulus}};
 
 OperatorFunction getOperatorFunction(char op) {
     for (int i = 0; i < sizeof(operatorMappings) / sizeof(OperatorMapping);
          i++) {
-        if (op == *(operatorMappings[i].operatorString)) {
+        if (op == operatorMappings[i].operatorChar) {
             return operatorMappings[i].operatorFunction;
         }
     }
@@ -98,7 +98,7 @@ void calculatorMenu() {
     op = getValidOperator();
     // Perform the operation
     result = getOperatorFunction(op)(num1, num2);
-    if (op == '/' || op == '%') {
+    if (op == OPERATOR_DIV || op == OPERATOR_MOD) {
         if (num2 == 0) {
             printf("Error: Division by zero.\n");
             return;

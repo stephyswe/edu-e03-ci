@@ -4,39 +4,14 @@
 #include <string.h>
 
 #include "input.h"
+#include "shapesfunc.h"
 
 typedef struct {
     char *name;
     Shapes_Status (*function)(double *, double *);
 } ShapeFunction;
 
-Shapes_Status inputRectangle(double *area, double *perimeter) {
-    double length, width;
-    Shapes_Status status = Shapes_Status_Ok;
-    GET_INPUT_VALUE("length: ", &length);
-    GET_INPUT_VALUE("width: ", &width);
-    return createRectangle(length, width, area, perimeter);
-}
 
-Shapes_Status createRectangle(double length, double width, double *area,
-                              double *perimeter) {
-    if (length <= 0 || width <= 0) {
-        return Shapes_Status_InvalidInput;
-    }
-    *area = length * width;
-    *perimeter = 2 * (length + width);
-    return Shapes_Status_Ok;
-}
-
-Shapes_Status createTriangle(double *area, double *perimeter) {
-    double base, height;
-    Shapes_Status status;
-    GET_INPUT_VALUE("base: ", &base);
-    GET_INPUT_VALUE("height: ", &height);
-    *area = base * height / 2;
-    *perimeter = 2 * (base + height);
-    return Shapes_Status_Ok;
-}
 
 Shapes_Status createCircle(double *area, double *perimeter) {
     const double PI = 3.14159265358979323846;
@@ -60,7 +35,7 @@ Shapes_Status createParallelogram(double *area, double *perimeter) {
 };
 
 ShapeFunction shapeFunctions[] = {{"rectangle", inputRectangle},
-                                  {"triangle", createTriangle},
+                                  {"triangle", inputTriangle},
                                   {"circle", createCircle},
                                   {"parallelogram", createParallelogram},
                                   {NULL, NULL}};
@@ -84,10 +59,8 @@ Shapes_Status shapesMenu() {
 
         // loop through the shape functions until we find a match.
         while (current->name != NULL) {
-
             // If the current shape function matches
             if (STR_EQUAL(current->name, shape)) {
-
                 // Call the shape function to create the shape.
                 status = current->function(&area, &perimeter);
 

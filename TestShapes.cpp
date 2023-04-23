@@ -3,7 +3,7 @@
 extern "C" {
 #include "calculator.h"
 #include "input.h"
-#include "shapes.h"
+#include "shapesfunc.h"
 }
 
 class ShapesTest : public testing::Test {
@@ -18,6 +18,9 @@ class ShapesTest : public testing::Test {
 };
 
 // ** Shapes Tests **
+
+// ** 1 - Rectangle **
+
 TEST_F(ShapesTest, WhenCreateRectangleIsOK) {
     // ARRANGE
     double area, perimeter;
@@ -41,6 +44,35 @@ TEST_F(ShapesTest, WhenCreateRectangleLengthIsZero) {
     // ASSERT
     ASSERT_EQ(status, Shapes_Status_InvalidInput);
 }
+
+// ** 2 - Triangle **
+
+TEST_F(ShapesTest, WhenCreateTriangleLengthIsOK) {
+    // ARRANGE
+    double area, perimeter;
+
+    // ACT
+    Shapes_Status status = createTriangle(5.0, 6.0, &area, &perimeter);
+
+    // ASSERT
+    // ASSERT
+    ASSERT_EQ(status, Shapes_Status_Ok);
+    ASSERT_DOUBLE_EQ(area, 15.0);
+    ASSERT_DOUBLE_EQ(perimeter, 22.0);
+}
+
+TEST_F(ShapesTest, WhenCreateTriangleLengthIsZero) {
+    // ARRANGE
+    double area, perimeter;
+
+    // ACT
+    Shapes_Status status = createTriangle(0, 6.0, &area, &perimeter);
+
+    // ASSERT
+    ASSERT_EQ(status, Shapes_Status_InvalidInput);
+}
+
+
 
 // ** Calculator Tests **
 TEST_F(ShapesTest, AddsTwoNumbersCorrectly) {
