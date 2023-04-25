@@ -2,6 +2,7 @@
 
 extern "C" {
 #include "calculator.h"
+#include "game.h"
 #include "input.h"
 #include "shapesfunc.h"
 }
@@ -11,11 +12,26 @@ class ShapesTest : public testing::Test {
     // Override this to define how to set up the environment.
     void SetUp() override {
         // game_initialize();	/* Without this the Tests could break*/
+        srand(12345);
     }
+
+    static int mock_rand(void) { return mock_computer_choice; }
+
+    // global variable that holds the computer's choice for each test case
+    static int mock_computer_choice;
 
     // Override this to define how to tear down the environment.
     virtual void TearDown() {}
+
+    // function to compare the result of play_game() with the expected result
+    void assert_game_result(const char *user_choice,
+                            enum Game_Status expected) {
+        enum Game_Status result = play_game(user_choice, &mock_rand);
+        EXPECT_EQ(result, expected);
+    }
 };
+
+int ShapesTest::mock_computer_choice = 0;
 
 // ** Shapes Tests - All Four (rectangle, triangle, circle, parallelogram) **
 
@@ -125,6 +141,8 @@ TEST_F(ShapesTest, WhenCreateParallelogramLengthIsZero) {
 }
 
 // ** Calculator Tests **
+
+// ** 1 - addition **
 TEST_F(ShapesTest, AddsTwoNumbersCorrectly) {
     // Arrange
     double num1 = 2.5;
@@ -150,3 +168,15 @@ TEST_F(ShapesTest, AddsTwoNumbersWrongResultInError) {
     // Assert
     EXPECT_FALSE(result == expected_result);
 }
+
+// ** Game Tests **
+
+// ** 1 - Stones vs Scissors - Winner: User **
+TEST_F(ShapesTest, TestStonesVsScissors) {
+    mock_computer_choice = 1;  // Set the computer's choice to "Stones"
+
+    Game_Status status = play_game("Stones", &rand);
+
+    EXPECT_EQ(status, Game_Status_Win_User);
+}
+

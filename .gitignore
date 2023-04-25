@@ -5,3 +5,5 @@
 .clang-format
 /shapes.o
 /TestShapes.o
+
+*.o

@@ -57,9 +57,6 @@ char getValidOperator() {
             scanf("%*c");
         }
     }
-
-    printf("Maximum number of attempts reached. Defaulting to '+'.\n");
-    return '+';
 }
 
 OperatorFunction opFunction = NULL;
