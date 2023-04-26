@@ -1,5 +1,6 @@
+#include "shapesfunc.h"
+
 #include "input.h"
-#include "shapes.h"
 
 Shapes_Status inputRectangle(double *area, double *perimeter) {
     double length, width;
@@ -37,8 +38,7 @@ Shapes_Status inputTriangle(double *area, double *perimeter) {
     return createTriangle(base, height, area, perimeter);
 }
 
-Shapes_Status createCircle(double radius, double *area,
-                           double *perimeter) {
+Shapes_Status createCircle(double radius, double *area, double *perimeter) {
     const double PI = 3.14;
     if (radius <= 0) {
         return Shapes_Status_InvalidInput;
@@ -55,8 +55,8 @@ Shapes_Status inputCircle(double *area, double *perimeter) {
     return createCircle(radius, area, perimeter);
 }
 
-Shapes_Status createParallelogram(double base, double height, double side, double *area,
-                           double *perimeter) {
+Shapes_Status createParallelogram(double base, double height, double side,
+                                  double *area, double *perimeter) {
     if (base <= 0 || height <= 0 || side <= 0) {
         return Shapes_Status_InvalidInput;
     }
@@ -73,5 +73,3 @@ Shapes_Status inputParallelogram(double *area, double *perimeter) {
     GET_INPUT_VALUE("side: ", &side);
     return createParallelogram(base, height, side, area, perimeter);
 };
-
-

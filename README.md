@@ -18,6 +18,25 @@ Area: 20.00
 Perimeter: 18.00
 ```
 
+Handle invalid input (e.g. numbers instead of text, or negative numbers). The program should not crash, but instead print an error message and allow the user to try again.
+
+Input Shape error handling:
+```
+Enter shape (rectangle, parallelogram, triangle, circle): rec
+Invalid shape
+Enter shape (rectangle, parallelogram, triangle, circle): -1
+Invalid shape
+Enter shape (rectangle, parallelogram, triangle, circle): 1
+Invalid shape
+Enter shape (rectangle, parallelogram, triangle, circle): rectangle
+length:
+```
+
+Input Shape error handling:
+```
+
+```
+
 Calculator: Enter two numbers and then select which operator to use: +, -, \*, /, and % (modulus). Returns
 the value.
 
@@ -26,6 +45,18 @@ num1: 5
 num2: 7
 Enter operator (+-*/%): *
 5.00 * 7.00 = 35.00
+```
+
+Handle invalid input (e.g. numbers instead of text, or negative numbers). The program should not crash, but instead print an error message and allow the user to try again.
+```
+Enter shape (rectangle, parallelogram, triangle, circle): rec
+Invalid shape
+Enter shape (rectangle, parallelogram, triangle, circle): -1
+Invalid shape
+Enter shape (rectangle, parallelogram, triangle, circle): 1
+Invalid shape
+Enter shape (rectangle, parallelogram, triangle, circle): rectangle
+length:
 ```
 
 Game: play Rock, Paper, Scissors against the computer. The result (win or loss), date of the game, and the average number of times you have won against the computer (at that point) is saved in a file.

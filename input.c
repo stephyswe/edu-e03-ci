@@ -10,8 +10,6 @@
 
 #include "shapes.h"
 
-
-
 Shapes_Status getInputValue(char *param, double *value) {
     int numTries = 0;
     char input[20];
@@ -21,7 +19,8 @@ Shapes_Status getInputValue(char *param, double *value) {
         inputResult = GetInput(param, input, sizeof(input));
 
         if (inputResult == INPUT_RESULT_OK) {
-            if (sscanf(input, "%lf", value) == 1) {
+            // check number is positive
+            if (sscanf(input, "%lf", value) == 1 && atoi(input) > 0) {
                 return Shapes_Status_Ok;
             }
         }

@@ -38,7 +38,7 @@ TEST_F(ShapesTest, WhenCreateRectangleLengthIsZero) {
 
 // ** 2 - Triangle **
 
-TEST_F(ShapesTest, WhenCreateTriangleLengthIsOK) {
+TEST_F(ShapesTest, WhenCreateTriangleIsOK) {
     double area, perimeter;
     Shapes_Status status = createTriangle(5.0, 6.0, &area, &perimeter);
     // ASSERT
@@ -47,7 +47,7 @@ TEST_F(ShapesTest, WhenCreateTriangleLengthIsOK) {
     ASSERT_DOUBLE_EQ(perimeter, 22.0);
 }
 
-TEST_F(ShapesTest, WhenCreateTriangleLengthIsZero) {
+TEST_F(ShapesTest, WhenCreateTriangleBaseIsZero) {
     double area, perimeter;
     Shapes_Status status = createTriangle(0, 6.0, &area, &perimeter);
     ASSERT_EQ(status, Shapes_Status_InvalidInput);
@@ -55,7 +55,7 @@ TEST_F(ShapesTest, WhenCreateTriangleLengthIsZero) {
 
 // ** 3 - Circle **
 
-TEST_F(ShapesTest, WhenCreateCircleLengthIsOK) {
+TEST_F(ShapesTest, WhenCreateCircleIsOK) {
     // ARRANGE
     double area, perimeter;
 
@@ -68,19 +68,14 @@ TEST_F(ShapesTest, WhenCreateCircleLengthIsOK) {
     ASSERT_DOUBLE_EQ(perimeter, 31.40);
 }
 
-TEST_F(ShapesTest, WhenCreateCircleLengthIsZero) {
-    // ARRANGE
+TEST_F(ShapesTest, WhenCreateCircleRadiusIsZero) {
     double area, perimeter;
-
-    // ACT
     Shapes_Status status = createCircle(0, &area, &perimeter);
-
-    // ASSERT
     ASSERT_EQ(status, Shapes_Status_InvalidInput);
 }
 
 // ** 4 - Parallelogram **
-TEST_F(ShapesTest, WhenCreateParallelogramLengthIsOK) {
+TEST_F(ShapesTest, WhenCreateParallelogramIsOK) {
     // ARRANGE
     double area, perimeter;
 
@@ -94,13 +89,8 @@ TEST_F(ShapesTest, WhenCreateParallelogramLengthIsOK) {
     ASSERT_DOUBLE_EQ(perimeter, 24.0);
 }
 
-TEST_F(ShapesTest, WhenCreateParallelogramLengthIsZero) {
-    // ARRANGE
+TEST_F(ShapesTest, WhenCreateParallelogramBaseIsZero) {
     double area, perimeter;
-
-    // ACT
     Shapes_Status status = createParallelogram(0, 6.0, 7.0, &area, &perimeter);
-
-    // ASSERT
     ASSERT_EQ(status, Shapes_Status_InvalidInput);
 }
