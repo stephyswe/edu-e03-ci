@@ -10,53 +10,23 @@
 
 #include "shapes.h"
 
-Shapes_Status getInputValue(char *param, double *value) {
-    int numTries = 0;
+void getInputValue(char *param, double *value) {
     char input[20];
     INPUT_RESULT inputResult;
 
-    while (numTries < 3) {  // Allow up to 3 attempts
+    while (true) {  // Allow up to 3 attempts
         inputResult = GetInput(param, input, sizeof(input));
 
         if (inputResult == INPUT_RESULT_OK) {
             // check number is positive
             if (sscanf(input, "%lf", value) == 1 && atoi(input) > 0) {
-                return Shapes_Status_Ok;
+                break;
             }
         }
 
-        numTries++;
-
-        if (numTries < 3) {
-            printf("Invalid input, please try again.\n");
-        }
+        printf("Invalid input, please try again.\n");
     }
-
-    return Shapes_Status_InvalidInput;
 };
-
-INPUT_RESULT GetInputDouble(char *prompt, double *value) {
-    char input[20];
-    INPUT_RESULT inputResult;
-
-    if (prompt != NULL && strlen(prompt) > 0) {
-        printf("%s", prompt);
-    }
-
-    fflush(stdin);  // Flush input buffer
-
-    inputResult = GetInput(NULL, input, sizeof(input));
-
-    if (inputResult == INPUT_RESULT_OK) {
-        if (sscanf(input, "%lf", value) == 1) {
-            return INPUT_RESULT_OK;
-        } else {
-            return INPUT_RESULT_INVALID_INPUT;
-        }
-    }
-
-    return inputResult;
-}
 
 INPUT_RESULT GetInput(char *prompt, char *buff, int maxSize) {
     if (prompt != NULL && strlen(prompt) > 0) {

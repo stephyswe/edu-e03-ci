@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 
+#define STR_EQUAL(str1, str2) (strcmp(str1, str2) == 0)
+
 typedef enum {
     Shapes_Status_Ok,
     Shapes_Status_InvalidShape,

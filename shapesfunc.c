@@ -44,32 +44,28 @@ Shapes_Status createParallelogram(double base, double height, double side,
 
 Shapes_Status inputRectangle(double *area, double *perimeter) {
     double length, width;
-    Shapes_Status status = Shapes_Status_Ok;
-    GET_INPUT_VALUE("length: ", &length);
-    GET_INPUT_VALUE("width: ", &width);
+    getInputValue("length: ", &length);
+    getInputValue("width: ", &width);
     return createRectangle(length, width, area, perimeter);
 }
 
 Shapes_Status inputTriangle(double *area, double *perimeter) {
     double base, height;
-    Shapes_Status status;
-    GET_INPUT_VALUE("base: ", &base);
-    GET_INPUT_VALUE("height: ", &height);
+    getInputValue("base: ", &base);
+    getInputValue("height: ", &height);
     return createTriangle(base, height, area, perimeter);
 }
 
 Shapes_Status inputCircle(double *area, double *perimeter) {
     double radius;
-    Shapes_Status status;
-    GET_INPUT_VALUE("radius: ", &radius);
+    getInputValue("radius: ", &radius);
     return createCircle(radius, area, perimeter);
 }
 
 Shapes_Status inputParallelogram(double *area, double *perimeter) {
     double base, height, side;
-    Shapes_Status status;
-    GET_INPUT_VALUE("base: ", &base);
-    GET_INPUT_VALUE("height: ", &height);
-    GET_INPUT_VALUE("side: ", &side);
+    getInputValue("base: ", &base);
+    getInputValue("height: ", &height);
+    getInputValue("side: ", &side);
     return createParallelogram(base, height, side, area, perimeter);
 };
