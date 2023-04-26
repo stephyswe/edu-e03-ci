@@ -1,3 +1,6 @@
+#ifndef INPUT_H
+#define INPUT_H
+
 #include <stdbool.h>
 
 #include "shapes.h"
@@ -11,3 +14,5 @@ typedef enum {
 
 INPUT_RESULT GetInput(char *prompt, char *buff, int maxSize);
 void getInputValue(char *param, double *value);
+
+#endif /* INPUT_H */
