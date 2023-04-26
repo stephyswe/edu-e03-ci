@@ -16,12 +16,14 @@ typedef enum {
 #define OPERATOR_DIV '/'
 #define OPERATOR_MOD '%'
 
+#define GET_INPUT(prompt, var)                                               \
+    while ((status = getInputValue(prompt, &var)) != Calculator_Status_Ok) { \
+        printf("Invalid input for " #var ". Please try again.\n");           \
+    }
+
 typedef double (*OperatorFunction)(double, double);
 
-double calculateAddiction(double num1, double num2) {
-    if (num1 == 0 && num2 == 0) return Calculator_Status_InvalidInput;
-    return num1 + num2;
-}
+double addition(double num1, double num2) { return num1 + num2; }
 
 double subtract(double num1, double num2) { return num1 - num2; }
 
@@ -31,10 +33,8 @@ double divide(double num1, double num2) { return num1 / num2; }
 
 double modulus(double num1, double num2) { return fmod(num1, num2); }
 
-#define GET_INPUT(prompt, var)                                               \
-    while ((status = getInputValue(prompt, &var)) != Calculator_Status_Ok) { \
-        printf("Invalid input for " #var ". Please try again.\n");           \
-    }
+// what does fmod do?
+// is fmod same as modulus operator? Answer is yes
 
 char getValidOperator() {
     const char* VALID_OPERATORS = "+-*/%";
@@ -66,7 +66,7 @@ typedef struct {
     OperatorFunction operatorFunction;
 } OperatorMapping;
 
-OperatorMapping operatorMappings[] = {{OPERATOR_ADD, calculateAddiction},
+OperatorMapping operatorMappings[] = {{OPERATOR_ADD, addition},
                                       {OPERATOR_SUB, subtract},
                                       {OPERATOR_MUL, multiply},
                                       {OPERATOR_DIV, divide},
@@ -83,7 +83,7 @@ OperatorFunction getOperatorFunction(char op) {
 }
 
 void calculatorMenu() {
-    printf("Calculator\n");
+    printf("Calculator menu\n");
 
     double num1, num2, result;
     char op;
@@ -95,12 +95,6 @@ void calculatorMenu() {
     op = getValidOperator();
     // Perform the operation
     result = getOperatorFunction(op)(num1, num2);
-    if (op == OPERATOR_DIV || op == OPERATOR_MOD) {
-        if (num2 == 0) {
-            printf("Error: Division by zero.\n");
-            return;
-        }
-    }
 
     printf("%.2lf %c %.2lf = %.2lf\n", num1, op, num2, result);
 }

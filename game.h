@@ -18,7 +18,8 @@ enum Choice {
     Choice_Bag,
 };
 
-enum Game_Status play_game(const char *user_choice, int (*computer_choice)());
+enum Game_Status play_game(const char *user_choice,
+                           enum Choice *computer_const_choice);
 int game();
 
 #endif  // GAME_H

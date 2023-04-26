@@ -27,15 +27,21 @@ $(OUTPUTDIR)/%.o: %.c $(DEPS)
 
 clean:
 	@del /q "$(OUTPUTDIR)"
-	@del /q $(PROG)
+	@del /q $(PROG) $(TEST)
 
 $(OUTPUTDIR):
 	@mkdir "$(OUTPUTDIR)"
 
-$(TEST): input.o TestShapes.o calculator.o shapesfunc.o game.o
-	g++ -o $@ $^ $(CFLAGS) -I $(GTEST)  $(LIBGTEST)
+$(TEST): input.o TestShapes.o calculator.o shapesfunc.o game.o TestCalc.o TestGame.o
+	g++ -o $@ $^ $(CFLAGS) -I $(GTEST) $(LIBGTEST)
 
 test: $(TEST)
 	./$(TEST)
+
+$(OUTPUTDIR)/TestCalc.o: TestCalc.cpp $(DEPS)
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+$(OUTPUTDIR)/TestGame.o: TestGame.cpp $(DEPS)
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 .PHONY: clean test

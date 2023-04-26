@@ -17,18 +17,21 @@ int strings_are_equal(const char *string1, const char *string2) {
     return strcmp(string1, string2) == 0;
 }
 
-enum Game_Status play_game(const char *user_choice, int (*rand_func)(void)) {
+enum Game_Status play_game(const char *user_choice,
+                           enum Choice *computer_const_choice) {
     // variables
     int computer_choice;
     enum Choice user = -1;
     enum Choice computer = -1;
 
     // randomize computer choice
-    computer_choice = rand_func() % MAX_CHOICES;
-
-    // randomize computer choice
-    printf("You chose: %s\n", user_choice);
-    printf("Computer chose: %s\n", choices[computer_choice]);
+    if (computer_const_choice == NULL) {
+        // variables for game
+        srand(time(NULL));
+        computer_choice = rand() % MAX_CHOICES;
+    } else {
+        computer_choice = *computer_const_choice;
+    }
 
     // convert user choice to enum type
     if (strings_are_equal(user_choice, "Stones")) {
@@ -52,6 +55,7 @@ enum Game_Status play_game(const char *user_choice, int (*rand_func)(void)) {
     if (user == computer) {
         return Game_Status_Win_Tie;
     }
+
     // check if user wins
     else if ((user == Choice_Stones && computer == Choice_Scissors) ||
              (user == Choice_Scissors && computer == Choice_Bag) ||
@@ -139,6 +143,8 @@ int game() {
         avg_wins = (double)num_wins / num_games;
     }
 
+    printf("Game menu\n");
+
     // play game
     while (1) {
         char user_choice[MAX_CHOICE_LEN];
@@ -147,7 +153,7 @@ int game() {
         scanf("%s", user_choice);
 
         // result: 2 computer, 1 tie, 0 user
-        enum Game_Status result = play_game(user_choice, &rand);
+        enum Game_Status result = play_game(user_choice, NULL);
 
         if (result == Game_Status_Win_Tie) {
             printf("It's a tie!\n");
