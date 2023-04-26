@@ -107,8 +107,7 @@ void read_results(int *num_wins, int *num_games) {
             continue;
         }
         char *token = strtok(line, "\t");
-        printf("What is token??? %s\n", token);
-        // check first letter in token
+        // Check if the token starts with "U"
         if (token[0] == 'U') {
             (*num_wins)++;
         }
@@ -129,14 +128,12 @@ int game() {
     // variables for game
     srand(time(NULL));
     printf("Game menu\n");
-    // char play_again[MAX_CHOICE_LEN];
 
-    // play game
     while (1) {
         int num_wins = 0;
         int num_games = 0;
         double avg_wins = 0.0;
-        // read result from file
+
         read_results(&num_wins, &num_games);
 
         printf("num of wins: %d", num_wins);
@@ -174,9 +171,6 @@ int game() {
         // print stats
         printf("Your average win rate is %.2lf%% (%d/%d).\n\n",
                avg_wins * 100.0, num_wins, num_games);
-
-        // ask user if they want to play again
-
-    }  // while (play_again[0] == 'y' || play_again[0] == 'Y');
+    }
     return 0;
 }
