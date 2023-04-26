@@ -13,43 +13,33 @@
 const char *choices[MAX_CHOICES] = {"Stones", "Scissors", "Bag"};
 
 // Function to check if two strings are equal
-int strings_are_equal(const char *string1, const char *string2) {
-    return strcmp(string1, string2) == 0;
-}
+
+enum Choice parse_choice(const char *str) {
+    if (strcmp(str, "Stones") == 0) {
+        return Choice_Stones;
+    } else if (strcmp(str, "Scissors") == 0) {
+        return Choice_Scissors;
+    } else {
+        return Choice_Bag;
+    }
+};
 
 enum Game_Status play_game(const char *user_choice,
                            enum Choice *computer_const_choice) {
     // variables
-    int computer_choice;
-    enum Choice user = -1;
+    enum Choice user = parse_choice(user_choice);
     enum Choice computer = -1;
 
-    // randomize computer choice
+    // randomize computer choice if not testing
     if (computer_const_choice == NULL) {
-        // variables for game
         srand(time(NULL));
-        computer_choice = rand() % MAX_CHOICES;
+        computer = rand() % MAX_CHOICES;
     } else {
-        computer_choice = *computer_const_choice;
+        computer = *computer_const_choice;
     }
 
-    // convert user choice to enum type
-    if (strings_are_equal(user_choice, "Stones")) {
-        user = Choice_Stones;
-    } else if (strings_are_equal(user_choice, "Scissors")) {
-        user = Choice_Scissors;
-    } else if (strings_are_equal(user_choice, "Bag")) {
-        user = Choice_Bag;
-    }
-
-    // convert computer choice to enum type
-    if (strings_are_equal(choices[computer_choice], "Stones")) {
-        computer = Choice_Stones;
-    } else if (strings_are_equal(choices[computer_choice], "Scissors")) {
-        computer = Choice_Scissors;
-    } else if (strings_are_equal(choices[computer_choice], "Bag")) {
-        computer = Choice_Bag;
-    }
+    // print user and computer choice.
+    printf("User: %s\tComputer: %s\n", choices[user], choices[computer]);
 
     // check if it's a tie
     if (user == computer) {
@@ -117,8 +107,9 @@ void read_results(int *num_wins, int *num_games) {
             continue;
         }
         char *token = strtok(line, "\t");
-        int result = atoi(token);
-        if (result == 1) {
+        printf("What is token??? %s\n", token);
+        // check first letter in token
+        if (token[0] == 'U') {
             (*num_wins)++;
         }
         (*num_games)++;
@@ -129,34 +120,27 @@ void read_results(int *num_wins, int *num_games) {
 }
 
 void printScore(int result) {
-    if (result == Game_Status_Win_Tie) {
-        printf("It's a tie!\n");
-    } else if (result == Game_Status_Win_User) {
-        printf("You win!\n");
-    } else {
-        printf("Computer wins!\n");
-    }
+    printf("%s\n", (result == Game_Status_Win_Tie)    ? "It's a tie!"
+                   : (result == Game_Status_Win_User) ? "You win!"
+                                                      : "Computer wins!");
 }
 
 int game() {
     // variables for game
     srand(time(NULL));
-    int num_wins = 0;
-    int num_games = 0;
-    double avg_wins = 0.0;
-
-    // read results from file
-    read_results(&num_wins, &num_games);
-
-    // calculate average win rate
-    if (num_games > 0) {
-        avg_wins = (double)num_wins / num_games;
-    }
-
     printf("Game menu\n");
+    // char play_again[MAX_CHOICE_LEN];
 
     // play game
     while (1) {
+        int num_wins = 0;
+        int num_games = 0;
+        double avg_wins = 0.0;
+        // read result from file
+        read_results(&num_wins, &num_games);
+
+        printf("num of wins: %d", num_wins);
+
         char user_choice[MAX_CHOICE_LEN];
 
         do {
@@ -171,18 +155,28 @@ int game() {
 
         printScore(result);
 
-        avg_wins = (double)num_wins / num_games;
-
-        // save result
-        save_result(result, avg_wins);
-
         // update stats
         num_wins += (result == 0);
         num_games++;
 
+        if (num_games > 0) {
+            avg_wins = (double)num_wins / num_games;
+        }
+
+        // Debugging
+        printf("num of wins: %d\n", num_wins);
+        printf("num of num_games: %d\n", num_games);
+        printf("avg wins: %lf\n", avg_wins);
+
+        // save result
+        save_result(result, avg_wins);
+
         // print stats
         printf("Your average win rate is %.2lf%% (%d/%d).\n\n",
                avg_wins * 100.0, num_wins, num_games);
-    }
+
+        // ask user if they want to play again
+
+    }  // while (play_again[0] == 'y' || play_again[0] == 'Y');
     return 0;
 }
