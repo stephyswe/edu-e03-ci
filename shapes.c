@@ -6,51 +6,70 @@
 #include "input.h"
 #include "shapesfunc.h"
 
-ShapeFunction shapeFunctions[] = {{"rectangle", inputRectangle},
-                                  {"triangle", inputTriangle},
-                                  {"circle", inputCircle},
-                                  {"parallelogram", inputParallelogram},
-                                  {NULL, NULL}};
+// Function to get input values and create a shape
+Shapes_Status createShape(const char *const shapeType, double *const area,
+                          double *const perimeter) {
+    if (STR_EQUAL(shapeType, "rectangle")) {
+        double length, width;
+        getInputValue("length: ", &length);
+        getInputValue("width: ", &width);
+        return createRectangle(length, width, area, perimeter);
+    } else if (STR_EQUAL(shapeType, "triangle")) {
+        double base, height;
+        getInputValue("base: ", &base);
+        getInputValue("height: ", &height);
+        return createTriangle(base, height, area, perimeter);
+    } else if (STR_EQUAL(shapeType, "circle")) {
+        double radius;
+        getInputValue("radius: ", &radius);
+        return createCircle(radius, area, perimeter);
+    } else if (STR_EQUAL(shapeType, "parallelogram")) {
+        double base, height, side;
+        getInputValue("base: ", &base);
+        getInputValue("height: ", &height);
+        getInputValue("side: ", &side);
+        return createParallelogram(base, height, side, area, perimeter);
+    }
+    return Shapes_Status_InvalidInput;
+}
 
-Shapes_Status createShape(char *shape, Shapes_Status status) {
-    double area, perimeter;
+void getValidShape(const char *prompt, char *shape) {
+    const char *validShapes[] = {"rectangle", "parallelogram", "triangle",
+                                 "circle"};
+    while (true) {
+        printf(prompt);
+        scanf("%s", shape);
 
-    // Look for the matching shape function.
-    ShapeFunction *current = shapeFunctions;
-
-    // loop through the shape functions until we find a match.
-    while (current->name != NULL) {
-        // If the current shape function matches
-        if (STR_EQUAL(current->name, shape)) {
-            // Call the shape function to create the shape.
-            status = current->function(&area, &perimeter);
-
-            // Print the area and perimeter of the shape.
-            if (status == Shapes_Status_Ok) {
-                printf("Area: %.2lf\n", area);
-                printf("Perimeter: %.2lf\n", perimeter);
+        // Check if the shape is valid
+        for (int i = 0; i < sizeof(validShapes) / sizeof(validShapes[0]); i++) {
+            // If the shape is valid, return it
+            if (strcmp(shape, validShapes[i]) == 0) {
+                return;
             }
-            break;
         }
-        current++;
-    }
 
-    if (status == Shapes_Status_InvalidShape) {
-        printf("Invalid shape\n");
+        printf(
+            "Invalid shape. Please enter one of: rectangle, parallelogram, "
+            "triangle, circle\n");
     }
-
-    return status;
 }
 
 int shapesMenu() {
     char shape[20];
-    Shapes_Status status = Shapes_Status_InvalidShape;
+    double area, perimeter;
+    Shapes_Status status = Shapes_Status_InvalidInput;
     char *prompt = "Enter shape (rectangle, parallelogram, triangle, circle): ";
 
     printf("Shapes menu\n");
-    while (status == Shapes_Status_InvalidShape) {
-        GetInput(prompt, shape, sizeof(shape));
-        status = createShape(shape, status);
+
+    // Use the original 'shape' variable to store the result of getValidShape
+    getValidShape(prompt, shape);
+
+    status = createShape(shape, &area, &perimeter);
+
+    if (status == Shapes_Status_Ok) {
+        printf("%s area: %.2f\n", shape, area);
+        printf("%s perimeter: %.2f\n", shape, perimeter);
     }
     return 0;
 }
