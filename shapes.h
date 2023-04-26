@@ -14,6 +14,11 @@ typedef struct {
     double perimeter;
 } Shapes;
 
+typedef struct {
+    char *name;
+    Shapes_Status (*function)(double *, double *);
+} ShapeFunction;
+
 int shapesMenu();
 
 #endif

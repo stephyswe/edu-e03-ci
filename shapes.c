@@ -6,11 +6,6 @@
 #include "input.h"
 #include "shapesfunc.h"
 
-typedef struct {
-    char *name;
-    Shapes_Status (*function)(double *, double *);
-} ShapeFunction;
-
 ShapeFunction shapeFunctions[] = {{"rectangle", inputRectangle},
                                   {"triangle", inputTriangle},
                                   {"circle", inputCircle},
