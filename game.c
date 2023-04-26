@@ -22,8 +22,6 @@ enum Game_Status play_game(const char *user_choice,
         computer = *computer_const_choice;
     }
 
-    printf("User: %s\tComputer: %s\n", choices[user], choices[computer]);
-
     return determine_winner(user, computer);
 }
 
