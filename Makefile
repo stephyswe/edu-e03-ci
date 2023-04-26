@@ -3,6 +3,7 @@ TEST=check.exe
 SOURCES=main.c calculator.c shapes.c input.c shapesfunc.c game.c gamefunc.c
 DEPS=shapes.h calculator.h input.h game.h gamefunc.h
 CC=gcc
+CXX=g++
 CFLAGS=-Wall -Werror
 DEBUG?=1
 GTEST = gtest
@@ -17,7 +18,9 @@ else
 	OUTPUTDIR=bin/release
 endif
 
+TESTDIR=bin/test
 OBJS =  $(addprefix $(OUTPUTDIR)/,$(SOURCES:.c=.o))
+TESTOBJS = $(addprefix $(TESTDIR)/, TestShapes.o TestCalc.o TestGame.o shapesfunc.o calculator.o game.o gamefunc.o input.o)
 
 $(PROG): $(OUTPUTDIR) $(OBJS)
 	$(CC) $(CFLAGS) -o $(PROG) $(OBJS)
@@ -27,21 +30,28 @@ $(OUTPUTDIR)/%.o: %.c $(DEPS)
 
 clean:
 	@del /q "$(OUTPUTDIR)"
+	@del /q "$(TESTDIR)"
 	@del /q $(PROG) $(TEST)
 
 $(OUTPUTDIR):
 	@mkdir "$(OUTPUTDIR)"
 
-$(TEST): TestShapes.o TestCalc.o TestGame.o shapesfunc.o calculator.o game.o gamefunc.o input.o
-	g++ -o $@ $^ $(CFLAGS) -I $(GTEST) $(LIBGTEST)
+$(TESTDIR):
+	@mkdir "$(TESTDIR)"
+
+$(TEST): $(TESTOBJS)
+	$(CXX) -o $@ $^ $(CFLAGS) -I $(GTEST) $(LIBGTEST)
 
 test: $(TEST)
 	./$(TEST)
 
-$(OUTPUTDIR)/TestCalc.o: TestCalc.cpp $(DEPS)
+$(TESTDIR)/%.o: %.c $(DEPS) | $(TESTDIR)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-$(OUTPUTDIR)/TestGame.o: TestGame.cpp $(DEPS)
+$(TESTDIR)/%.o: %.cpp $(DEPS) | $(TESTDIR)
+	$(CXX) $(CFLAGS) -o $@ -c $<
+
+$(TESTDIR)/TestCalc.o: TestCalc.cpp $(DEPS) | $(TESTDIR)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 .PHONY: clean test
