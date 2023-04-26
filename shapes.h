@@ -14,6 +14,6 @@ typedef struct {
     double perimeter;
 } Shapes;
 
-Shapes_Status shapesMenu();
+int shapesMenu();
 
 #endif

@@ -3,9 +3,8 @@
 #include <string.h>
 
 #include "calculator.h"
-#include "shapes.h"
-
 #include "game.h"
+#include "shapes.h"
 
 int mainmenu() {
     while (1) {

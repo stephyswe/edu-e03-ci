@@ -17,49 +17,45 @@ ShapeFunction shapeFunctions[] = {{"rectangle", inputRectangle},
                                   {"parallelogram", inputParallelogram},
                                   {NULL, NULL}};
 
-Shapes_Status shapesMenu() {
-    char shape[20];
+Shapes_Status createShape(char *shape, Shapes_Status status) {
     double area, perimeter;
-    Shapes_Status status;
-    // Create a variable to hold the user's input.
+
+    // Look for the matching shape function.
+    ShapeFunction *current = shapeFunctions;
+
+    // loop through the shape functions until we find a match.
+    while (current->name != NULL) {
+        // If the current shape function matches
+        if (STR_EQUAL(current->name, shape)) {
+            // Call the shape function to create the shape.
+            status = current->function(&area, &perimeter);
+
+            // Print the area and perimeter of the shape.
+            if (status == Shapes_Status_Ok) {
+                printf("Area: %.2lf\n", area);
+                printf("Perimeter: %.2lf\n", perimeter);
+            }
+            break;
+        }
+        current++;
+    }
+
+    if (status == Shapes_Status_InvalidShape) {
+        printf("Invalid shape\n");
+    }
+
+    return status;
+}
+
+int shapesMenu() {
+    char shape[20];
+    Shapes_Status status = Shapes_Status_InvalidShape;
     char *prompt = "Enter shape (rectangle, parallelogram, triangle, circle): ";
 
-    // Print the shapes menu.
     printf("Shapes menu\n");
-
-    do {
-        // Get the user's shape input.
+    while (status == Shapes_Status_InvalidShape) {
         GetInput(prompt, shape, sizeof(shape));
-
-        // Look for the matching shape function.
-        ShapeFunction *current = shapeFunctions;
-
-        // loop through the shape functions until we find a match.
-        while (current->name != NULL) {
-            // If the current shape function matches
-            if (STR_EQUAL(current->name, shape)) {
-                // Call the shape function to create the shape.
-                status = current->function(&area, &perimeter);
-
-                // Print the area and perimeter of the shape.
-                if (status == Shapes_Status_Ok) {
-                    printf("Area: %.2lf\n", area);
-                    printf("Perimeter: %.2lf\n", perimeter);
-                }
-                break;
-            }
-            current++;
-        }
-
-        // If the user's input is invalid or the shape was not found, print an
-        // error message and try again.
-        if (status == Shapes_Status_InvalidShape ||
-            GetInput(NULL, NULL, 0) == INPUT_RESULT_INVALID_INPUT) {
-            printf("Invalid shape\n");
-            status = Shapes_Status_InvalidShape;
-        }
-    } while (status == Shapes_Status_InvalidShape);
-
-    // Return the status of the shape creation.
-    return status;
+        status = createShape(shape, status);
+    }
+    return 0;
 }
