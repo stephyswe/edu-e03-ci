@@ -2,8 +2,8 @@
 /bin
 /programmet-debug.exe
 /check.exe
+/check_shapes.exe
+/check_calc.exe
+/check_game.exe
 .clang-format
-/shapes.o
-/TestShapes.o
-
 *.o
