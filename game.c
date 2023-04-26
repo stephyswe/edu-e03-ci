@@ -128,6 +128,16 @@ void read_results(int *num_wins, int *num_games) {
     fclose(f);
 }
 
+void printScore(int result) {
+    if (result == Game_Status_Win_Tie) {
+        printf("It's a tie!\n");
+    } else if (result == Game_Status_Win_User) {
+        printf("You win!\n");
+    } else {
+        printf("Computer wins!\n");
+    }
+}
+
 int game() {
     // variables for game
     srand(time(NULL));
@@ -149,19 +159,17 @@ int game() {
     while (1) {
         char user_choice[MAX_CHOICE_LEN];
 
-        printf("Enter your choice (Stones, Scissors, or Bag): ");
-        scanf("%s", user_choice);
+        do {
+            printf("Please enter 'Bag', 'Stones', or 'Scissors': ");
+            scanf("%s", user_choice);
+        } while (strcmp(user_choice, "Bag") != 0 &&
+                 strcmp(user_choice, "Stones") != 0 &&
+                 strcmp(user_choice, "Scissors") != 0);
 
         // result: 2 computer, 1 tie, 0 user
         enum Game_Status result = play_game(user_choice, NULL);
 
-        if (result == Game_Status_Win_Tie) {
-            printf("It's a tie!\n");
-        } else if (result == Game_Status_Win_User) {
-            printf("You win!\n");
-        } else {
-            printf("Computer wins!\n");
-        }
+        printScore(result);
 
         avg_wins = (double)num_wins / num_games;
 
@@ -169,7 +177,7 @@ int game() {
         save_result(result, avg_wins);
 
         // update stats
-        num_wins += (result == 1);
+        num_wins += (result == 0);
         num_games++;
 
         // print stats
