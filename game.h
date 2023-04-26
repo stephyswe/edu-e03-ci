@@ -5,6 +5,8 @@
 
 #define MAX_CHOICES 3
 #define MAX_CHOICE_LEN 10
+#define MAX_LINE_LEN 50
+#define FILENAME "game_results.txt"
 
 enum Game_Status {
     Game_Status_Win_User,

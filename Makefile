@@ -1,6 +1,6 @@
 PROG=programmet.exe
 TEST=check.exe
-SOURCES=main.c calculator.c shapes.c input.c shapesfunc.c game.c
+SOURCES=main.c calculator.c shapes.c input.c shapesfunc.c game.c gamefunc.c
 DEPS=shapes.h calculator.h input.h game.h
 CC=gcc
 CFLAGS=-Wall -Werror
