@@ -5,8 +5,6 @@
 
 #include "game.h"
 
-void read_user_choice(char *user_choice);
-
 enum Choice get_random_choice();
 
 enum Choice parse_choice(const char *str);

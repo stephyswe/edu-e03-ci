@@ -6,6 +6,7 @@
 #include <time.h>
 
 #include "gamefunc.h"
+#include "input.h"
 
 const char *choices[MAX_CHOICES] = {"Stones", "Scissors", "Bag"};
 
@@ -32,12 +33,17 @@ int game() {
     int num_games = 0;
     double avg_wins = 0.0;
 
+    const char *prompt = "Enter your choice (Stones, Bag, Scissors): ";
+    const char *validList[] = {"stones", "bag", "scissors"};
+    int numValidList = sizeof(validList) / sizeof(validList[0]);
+    char *errorMsg = "Invalid choice \n";
+
     while (1) {
         char user_choice[MAX_CHOICE_LEN];
 
         read_file(&num_wins, &num_games);
 
-        read_user_choice(user_choice);
+        getValidInput(prompt, validList, numValidList, errorMsg, user_choice);
 
         // result: 2 computer, 1 tie, 0 user
         enum Game_Status result = play_game(user_choice, NULL);

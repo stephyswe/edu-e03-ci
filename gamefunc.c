@@ -6,18 +6,6 @@
 #include <time.h>
 
 #include "game.h"
-#include "input.h"
-
-// Read user's choice and validate it
-void read_user_choice(char *user_choice) {
-    const char *prompt = "Enter your choice (Stones, Scissors, or Bag): ";
-    const char *validList[] = {"Stones", "Bag", "Scissors"};
-    InputList list = {.validList = validList,
-                      .numValidList = ARRAY_SIZE(validList),
-                      .errorMsg = "Invalid choice. \n"};
-
-    getValidInput(prompt, &list, user_choice);
-}
 
 enum Choice parse_choice(const char *str) {
     if (strcmp(str, "Stones") == 0) {

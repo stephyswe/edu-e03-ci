@@ -1,18 +1,6 @@
 #include "shapesfunc.h"
 
-#include "input.h"
-
-void read_shape_choice(char *user_choice) {
-    const char *prompt =
-        "Enter your choice (rectangle, parallelogram, triangle, circle): ";
-    const char *validList[] = {"rectangle", "parallelogram", "triangle",
-                               "circle"};
-    InputList list = {.validList = validList,
-                      .numValidList = ARRAY_SIZE(validList),
-                      .errorMsg = "Invalid shape. \n"};
-
-    getValidInput(prompt, &list, user_choice);
-}
+#include <ctype.h>
 
 Shapes_Status createRectangle(double length, double width, double *area,
                               double *perimeter) {
