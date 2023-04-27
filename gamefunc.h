@@ -5,8 +5,6 @@
 
 #include "game.h"
 
-enum Choice get_random_choice();
-
 enum Choice parse_choice(const char *str);
 
 enum Game_Status determine_winner(enum Choice user, enum Choice computer);

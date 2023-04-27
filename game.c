@@ -18,7 +18,8 @@ enum Game_Status play_game(const char *user_choice,
     enum Choice computer = -1;
 
     if (computer_const_choice == NULL) {
-        computer = get_random_choice();
+        srand(time(NULL));
+        computer = rand() % 3;
     } else {
         computer = *computer_const_choice;
     }
@@ -29,15 +30,14 @@ enum Game_Status play_game(const char *user_choice,
 int game() {
     printf("Game menu\n");
 
-    int num_wins = 0;
-    int num_games = 0;
-    double avg_wins = 0.0;
-
     const char *prompt = "Enter your choice (Stones, Bag, Scissors): ";
     const char *validList[] = {"stones", "bag", "scissors", NULL};
     char *errorMsg = "Invalid choice \n";
 
     while (1) {
+        int num_wins = 0;
+        int num_games = 0;
+        double avg_wins = 0.0;
         char user_choice[MAX_CHOICE_LEN];
 
         read_file(&num_wins, &num_games);

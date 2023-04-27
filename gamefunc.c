@@ -17,11 +17,6 @@ enum Choice parse_choice(const char *str) {
     }
 };
 
-enum Choice get_random_choice() {
-    srand(60);
-    return rand() % MAX_CHOICES;
-}
-
 enum Game_Status determine_winner(enum Choice user, enum Choice computer) {
     if (user == computer) {
         return Game_Status_Win_Tie;
