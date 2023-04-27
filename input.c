@@ -55,11 +55,6 @@ INPUT_RESULT GetInput(char *prompt, char *buff, int maxSize) {
 
 void getValidInput(const char *prompt, const char *validList[],
                    const char *errorMsg, char *shape) {
-    int numValidList = 0;
-    while (validList[numValidList] != NULL) {
-        numValidList++;
-    }
-
     while (true) {
         printf("%s", prompt);
         scanf("%s", shape);
@@ -71,7 +66,7 @@ void getValidInput(const char *prompt, const char *validList[],
 
         // Check if the shape is valid
         bool isValid = false;
-        for (int i = 0; i < numValidList; i++) {
+        for (int i = 0; validList[i] != NULL; i++) {
             // If the shape is valid, return it
             if (strcmp(shape, validList[i]) == 0) {
                 isValid = true;
