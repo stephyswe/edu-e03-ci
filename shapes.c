@@ -40,13 +40,12 @@ int shapesMenu() {
     const char *prompt =
         "Enter your choice (rectangle, parallelogram, triangle, circle): ";
     const char *validList[] = {"rectangle", "parallelogram", "triangle",
-                               "circle"};
-    int numValidList = sizeof(validList) / sizeof(validList[0]);
+                               "circle", NULL};
     char *errorMsg = "Invalid shape \n";
 
     printf("Shapes menu\n");
 
-    getValidInput(prompt, validList, numValidList, errorMsg, shape);
+    getValidInput(prompt, validList, errorMsg, shape);
 
     createShape(shape, &area, &perimeter);
 

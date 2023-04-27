@@ -34,8 +34,7 @@ int game() {
     double avg_wins = 0.0;
 
     const char *prompt = "Enter your choice (Stones, Bag, Scissors): ";
-    const char *validList[] = {"stones", "bag", "scissors"};
-    int numValidList = sizeof(validList) / sizeof(validList[0]);
+    const char *validList[] = {"stones", "bag", "scissors", NULL};
     char *errorMsg = "Invalid choice \n";
 
     while (1) {
@@ -43,7 +42,7 @@ int game() {
 
         read_file(&num_wins, &num_games);
 
-        getValidInput(prompt, validList, numValidList, errorMsg, user_choice);
+        getValidInput(prompt, validList, errorMsg, user_choice);
 
         // result: 2 computer, 1 tie, 0 user
         enum Game_Status result = play_game(user_choice, NULL);

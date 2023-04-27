@@ -23,7 +23,7 @@ typedef struct {
 INPUT_RESULT GetInput(char *prompt, char *buff, int maxSize);
 void getInputValue(char *param, double *value);
 void getValidInput(const char *prompt, const char *validList[],
-                   int numValidList, const char *errorMsg, char *shape);
+                   const char *errorMsg, char *shape);
 void capitalInput(char *input);
 
 #endif /* INPUT_H */
