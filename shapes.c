@@ -54,9 +54,7 @@ void getValidShape(const char *prompt, char *shape) {
             }
         }
 
-        printf(
-            "Invalid shape. Please enter one of: rectangle, parallelogram, "
-            "triangle, circle\n");
+        printf("Invalid shape. \n");
     }
 }
 
