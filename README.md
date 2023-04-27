@@ -11,11 +11,11 @@ Main menu with three options (Shapes, Calculator or Game).
 Shapes: enter a shape (TEXT! not a number), and both the area and perimeter is calculated. These shapes are available to choose from: Rectangle, Parallelogram, Triangle, and Circle.
 
 ```
-Enter shape (rectangle, parallelogram, triangle, circle): rectangle
+Enter shape (rectangle, parallelogram, triangle, circle): Rectangle
 length: 4
-width: 5
-Area: 20.00
-Perimeter: 18.00
+width: 2
+rectangle area: 8.00
+rectangle perimeter: 12.00
 ```
 
 Handle invalid input (e.g. numbers instead of text, or negative numbers). The program should not crash, but instead print an error message and allow the user to try again.

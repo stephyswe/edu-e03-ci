@@ -54,7 +54,7 @@ void getValidShape(const char *prompt, char *shape) {
             }
         }
 
-        printf("Invalid shape. \n");
+        printf("Invalid shape \n");
     }
 }
 
