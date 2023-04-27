@@ -1,5 +1,6 @@
 #include "shapes.h"
 
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -39,6 +40,11 @@ void getValidShape(const char *prompt, char *shape) {
     while (true) {
         printf(prompt);
         scanf("%s", shape);
+
+        // Convert the input shape to lowercase
+        for (int i = 0; shape[i]; i++) {
+            shape[i] = tolower(shape[i]);
+        }
 
         // Check if the shape is valid
         for (int i = 0; i < sizeof(validShapes) / sizeof(validShapes[0]); i++) {
