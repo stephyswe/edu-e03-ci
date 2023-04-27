@@ -8,7 +8,8 @@
 
 Main menu with three options (Shapes, Calculator or Game).
 
-Shapes: enter a shape (TEXT! not a number), and both the area and perimeter is calculated. These shapes are available to choose from: Rectangle, Parallelogram, Triangle, and Circle.
+### Shapes:
+enter a shape (TEXT! not a number), and both the area and perimeter is calculated. These shapes are available to choose from: Rectangle, Parallelogram, Triangle, and Circle.
 
 ```
 Enter shape (rectangle, parallelogram, triangle, circle): Rectangle
@@ -43,8 +44,8 @@ Invalid input, please try again.
 length:
 ```
 
-Calculator: Enter two numbers and then select which operator to use: +, -, \*, /, and % (modulus). Returns
-the value.
+### Calculator
+enter two numbers and then select which operator to use: +, -, \*, /, and % (modulus). Returns the value.
 
 ```
 num1: 5
@@ -64,7 +65,8 @@ Invalid input, please try again.
 num1:
 ```
 
-Game: play Rock, Paper, Scissors against the computer. The result (win or loss), date of the game, and the average number of times you have won against the computer (at that point) is saved in a file.
+### Game
+play Rock, Paper, Scissors against the computer. The result (win or loss), date of the game, and the average number of times you have won against the computer (at that point) is saved in a file.
 Example data:
 
 ```
