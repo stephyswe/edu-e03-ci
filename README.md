@@ -34,7 +34,13 @@ length:
 
 Input Shape error handling:
 ```
-
+length: -2
+Invalid input, please try again.
+length: BOKSTAV
+Invalid input, please try again.
+length: 70000000000000000000000000000000000000000000000
+Invalid input, please try again.
+length:
 ```
 
 Calculator: Enter two numbers and then select which operator to use: +, -, \*, /, and % (modulus). Returns
@@ -49,21 +55,20 @@ Enter operator (+-*/%): *
 
 Handle invalid input (e.g. numbers instead of text, or negative numbers). The program should not crash, but instead print an error message and allow the user to try again.
 ```
-Enter shape (rectangle, parallelogram, triangle, circle): rec
-Invalid shape
-Enter shape (rectangle, parallelogram, triangle, circle): -1
-Invalid shape
-Enter shape (rectangle, parallelogram, triangle, circle): 1
-Invalid shape
-Enter shape (rectangle, parallelogram, triangle, circle): rectangle
-length:
+num1: -1
+Invalid input, please try again.
+num1: BOKSTAV
+Invalid input, please try again.
+num1: 70000000000000000000000000000000000000000
+Invalid input, please try again.
+num1:
 ```
 
 Game: play Rock, Paper, Scissors against the computer. The result (win or loss), date of the game, and the average number of times you have won against the computer (at that point) is saved in a file.
 Example data:
 
 ```
-Enter your choice (Stones, Scissors, or Bag): 3
+Enter your choice (Stones, Scissors, or Bag): Bag
 Computer wins!
 Your average win rate is 48.15% (13/28).
 

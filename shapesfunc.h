@@ -3,6 +3,8 @@
 
 #include "shapes.h"
 
+void read_shape_choice(char *user_choice);
+
 Shapes_Status createRectangle(double length, double width, double *area,
                               double *perimeter);
 

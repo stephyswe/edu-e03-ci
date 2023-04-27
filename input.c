@@ -52,3 +52,31 @@ INPUT_RESULT GetInput(char *prompt, char *buff, int maxSize) {
     buff[strlen(buff) - 1] = '\0';
     return INPUT_RESULT_OK;
 }
+
+void getValidInput(const char *prompt, InputList *list, char *shape) {
+    while (true) {
+        printf("%s", prompt);
+        scanf("%s", shape);
+
+        // Convert the input shape to lowercase
+        for (int i = 0; shape[i]; i++) {
+            shape[i] = tolower(shape[i]);
+        }
+
+        // Check if the shape is valid
+        bool isValid = false;
+        for (int i = 0; i < list->numValidList; i++) {
+            // If the shape is valid, return it
+            if (strcmp(shape, list->validList[i]) == 0) {
+                isValid = true;
+                break;
+            }
+        }
+
+        if (isValid) {
+            return;
+        }
+
+        printf("%s", list->errorMsg);
+    }
+}

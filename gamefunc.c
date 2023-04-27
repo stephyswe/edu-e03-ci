@@ -1,19 +1,22 @@
 
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
 #include "game.h"
+#include "input.h"
 
 // Read user's choice and validate it
 void read_user_choice(char *user_choice) {
-    do {
-        printf("Please enter 'Bag', 'Stones', or 'Scissors': ");
-        scanf("%s", user_choice);
-    } while (strcmp(user_choice, "Bag") != 0 &&
-             strcmp(user_choice, "Stones") != 0 &&
-             strcmp(user_choice, "Scissors") != 0);
+    const char *prompt = "Enter your choice (Stones, Scissors, or Bag): ";
+    const char *validList[] = {"Stones", "Bag", "Scissors"};
+    InputList list = {.validList = validList,
+                      .numValidList = ARRAY_SIZE(validList),
+                      .errorMsg = "Invalid choice. \n"};
+
+    getValidInput(prompt, &list, user_choice);
 }
 
 enum Choice parse_choice(const char *str) {
