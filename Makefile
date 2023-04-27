@@ -20,7 +20,7 @@ endif
 
 TESTDIR=bin/test
 OBJS =  $(addprefix $(OUTPUTDIR)/,$(SOURCES:.c=.o))
-TESTOBJS = $(addprefix $(TESTDIR)/, TestShapes.o TestCalc.o TestGame.o shapesfunc.o calculator.o game.o gamefunc.o input.o)
+TESTOBJS = $(addprefix $(TESTDIR)/, TestShapes.o TestCalculator.o TestGame.o shapesfunc.o calculator.o game.o gamefunc.o input.o)
 
 $(PROG): $(OUTPUTDIR) $(OBJS)
 	$(CC) $(CFLAGS) -o $(PROG) $(OBJS)
@@ -50,8 +50,5 @@ $(TESTDIR)/%.o: %.c $(DEPS) | $(TESTDIR)
 
 $(TESTDIR)/%.o: %.cpp $(DEPS) | $(TESTDIR)
 	$(CXX) $(CFLAGS) -o $@ -c $<
-
-$(TESTDIR)/TestCalc.o: TestCalc.cpp $(DEPS) | $(TESTDIR)
-	$(CC) $(CFLAGS) -o $@ -c $<
 
 .PHONY: clean test
