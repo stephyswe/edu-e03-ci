@@ -86,11 +86,6 @@ void update_statistics(enum Game_Status result, int *num_wins, int *num_games,
         *avg_wins = (double)*num_wins / *num_games;
     }
 
-    // Debugging
-    printf("num of wins: %d\n", *num_wins);
-    printf("num of num_games: %d\n", *num_games);
-    printf("avg wins: %lf\n", *avg_wins);
-
     // save result
     save_result(result, *avg_wins);
 }
