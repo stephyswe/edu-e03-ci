@@ -38,7 +38,7 @@ int shapesMenu() {
     double area, perimeter;
 
     const char *prompt =
-        "Enter your choice (rectangle, parallelogram, triangle, circle): ";
+        "Enter shape (rectangle, parallelogram, triangle, circle): ";
     const char *validList[] = {"rectangle", "parallelogram", "triangle",
                                "circle", NULL};
     char *errorMsg = "Invalid shape \n";
