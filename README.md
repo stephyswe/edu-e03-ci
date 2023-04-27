@@ -8,7 +8,7 @@
 
 Main menu with three options (Shapes, Calculator or Game).
 
-### Shapes:
+### Shapes
 enter a shape (TEXT! not a number), and both the area and perimeter is calculated. These shapes are available to choose from: Rectangle, Parallelogram, Triangle, and Circle.
 
 ```
